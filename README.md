@@ -7,7 +7,7 @@
 I did not provide my model checkpoints, but for any questions feel free to contact: topuz.ilayda@outlook.com
 
 <p align="center">
-<img src="Screenshot_9-10-2024_13484_.jpeg" width=60%>
+<img src="fig.jpeg" width=60%>
 </p>
 
 ## Requirements
@@ -19,10 +19,18 @@ pip install -r requirements.txt
 ```
 
 ## Training MDT_noclass
-To train MDT without class conditioning, you need to first download a dataset. For example for ImageNet, create folders ImageNet/train_images, ImageNet/val_images, and ImageNet/test_images. Then, simply run run.sh to train the model. Note that this model was trained solely for DIRE image reconstruction purposes and it does not serve for novel image generation.
+To train MDT without class conditioning, you need to first download a dataset. For example for ImageNet, create folders ImageNet/train_images, ImageNet/val_images, and ImageNet/test_images. Then, simply run the following command to train the model:
+```
+sh run.sh
+```
+Note that this model was trained solely for DIRE image reconstruction purposes and it does not serve for novel image generation.
 
 ## Training DIRE Classifier
-Before training DIRE classifier, you should copy the checkpoint of MDT_noclass model (named model290000.pt in the codes) to the folder DIRE_plus and run compute_dire.sh for train/val/test images to use the new MDT_noclass model during DIRE computations. Don't forget to modify MODEL_PATH according to yours. Then, link the resulting training DIRE images to the `data/train` folder. For example, you can link the DIRE images of real LSUN-Bedroom to `data/train/lsun/0_real` and link the DIRE images of ADM-LSUN-Bedroom to `data/train/lsun/1_fake_adm`. And do the same for validation set and testing set, just modify `data/train` to `data/val` and `data/test`. Then, you can train the DIRE classification model by running the following command:
+Before training DIRE classifier, you should copy the checkpoint of MDT_noclass model (named `model290000.pt` in the codes) to the folder DIRE_plus and run the following command for train/val/test images to use the new MDT_noclass model during DIRE computations:
+```
+sh compute_dire.sh
+```
+Don't forget to modify MODEL_PATH according to yours. Then, link the resulting training DIRE images to the `data/train` folder. For example, you can link the DIRE images of real LSUN-Bedroom to `data/train/lsun/0_real` and link the DIRE images of ADM-LSUN-Bedroom to `data/train/lsun/1_fake_adm`. And do the same for validation set and testing set, just modify `data/train` to `data/val` and `data/test`. Then, you can train the DIRE classification model by running the following command:
 ```
 sh train.sh
 ```
@@ -38,4 +46,4 @@ python demo.py -f [image_path/image_dir] -m [model_path]
 ```
 
 ## Acknowledgments
-These codes are modified version of the combination of [DIRE](https://github.com/ZhendongWang6/DIRE) and [MDT](https://github.com/sail-sg/MDT).
+These codes are modified version of the combination of [DIRE](https://github.com/ZhendongWang6/DIRE) and [MDT](https://github.com/sail-sg/MDT). Thanks!
